@@ -1,14 +1,13 @@
 function behavesLikeADomElementDecorator(describedClassName) {
     eval('var describedClass = ' + describedClassName);
+    var subject, element;
+
+    beforeEach(function () {
+        element = document.createElement('div');
+        subject = new describedClass(element);
+    });
+
     describe(describedClassName, function () {
-        var subject;
-        var element;
-
-        beforeEach(function () {
-            element = document.createElement('div');
-            subject = new describedClass(element);
-        });
-
         it("inherits from Koine.Decorators.Dom.ElementDecorator", function () {
             var instance = (subject instanceof Koine.Decorators.Dom.ElementDecorator);
             expect(subject).toBeTruthy();
@@ -93,3 +92,13 @@ function behavesLikeADomElementDecorator(describedClassName) {
         });
     });
 };
+
+function behavesLikeAnInputDecorator(describedClassName) {
+    eval('var describedClass = ' + describedClassName);
+    var subject, element;
+
+    beforeEach(function () {
+        element = document.createElement('div');
+        subject = new describedClass(element);
+    });
+}
