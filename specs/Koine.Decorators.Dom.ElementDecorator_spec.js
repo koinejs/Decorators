@@ -1,12 +1,93 @@
 describe("Koine.Decorators.Dom.ElementDecorator", function () {
     var DescribedClass = Koine.Decorators.Dom.ElementDecorator;
+    var subject;
+    var element;
 
     beforeEach(function () {
-        element = new DescribedClass();
+        element = document.createElement('div');
+        subject = new DescribedClass(element);
     });
 
     it("inherits from Koine.Decorators.Dom.ElementDecorator", function () {
-        var instance = (element instanceof Koine.Decorators.Dom.ElementDecorator);
-        expect(instance).toBeTruthy();
+        var instance = (subject instanceof Koine.Decorators.Dom.ElementDecorator);
+        expect(subject).toBeTruthy();
+    });
+
+    describe("#constructor()", function () {
+        it("requires an html element", function () {
+            expect(function() {
+                new DescribedClass();
+            }).toThrow();
+        });
+    });
+
+    describe("#getElement()", function () {
+        it("returns true if the class exists", function () {
+            expect(subject.getElement()).toBe(element);
+        });
+    });
+
+    describe("#hasClass()", function () {
+        it("returns true if the class exists", function () {
+            element.classList.add('yeps');
+            expect(subject.hasClass('nops')).toBeFalsy();
+            expect(subject.hasClass('yeps')).toBeTruthy();
+        });
+    });
+
+    describe("#addClass()", function () {
+        it("adds a class", function () {
+            var has = subject.addClass('yeps').hasClass('yeps');
+            expect(has).toBeTruthy();
+        });
+    });
+
+    describe("#removeClass()", function () {
+        it("removes class", function () {
+            var has = subject.addClass('yeps').removeClass('yeps').hasClass('yeps');
+            expect(has).toBeFalsy();
+        });
+    });
+
+    describe("#setAttribute()", function () {
+        it("sets attribute", function () {
+            subject.setAttribute('id', 'foo');
+            expect(element.id).toBe('foo');
+        });
+    });
+
+    describe("#getAttribute()", function () {
+        it("gets an attribute", function () {
+            var value = subject.setAttribute('id', 'foo').getAttribute('id');
+            expect(value).toBe('foo');
+        });
+    });
+
+    describe("#setId()", function () {
+        it("sets the id", function () {
+            var value = subject.setId('foo').getAttribute('id');
+            expect(value).toBe('foo');
+        });
+    });
+
+    describe("#getId()", function () {
+        it("gets the id", function () {
+            var value = subject.setId('foo').getId();
+            expect(value).toBe('foo');
+        });
+    });
+
+    describe("#setHtml()", function () {
+        it("sets the inner html", function () {
+            var html = subject.setHtml('foo').getElement().innerHTML;
+            expect(html).toBe('foo');
+        });
+    });
+
+    describe("#hetHtml()", function () {
+        it("gets the inner html", function () {
+            var html = subject.setHtml('foo').getHtml();
+            expect(html).toBe('foo');
+        });
     });
 });
