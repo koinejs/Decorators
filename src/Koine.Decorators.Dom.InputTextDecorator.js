@@ -17,12 +17,12 @@
     prop.setValue = function (value) {
         if (value !== this.getValue()) {
             this.getElement().setAttribute('value', value);
-            this.trigger(new Koine.Publisher.EventType('changed'));
-            this.trigger(new Koine.Publisher.EventType('changed:value'));
+            // this.trigger(new Koine.Publisher.EventType('changed'));
+            // this.trigger(new Koine.Publisher.EventType('changed:value'));
         }
 
         return this;
-    }
+    };
 
     /**
      * Gets the value
@@ -30,9 +30,9 @@
      */
     prop.getValue = function () {
         return this.getAttribute('value');
-    }
+    };
 
-    Koine.Publisher.wrap(Decorator);
+    // Koine.Publisher.wrap(Decorator);
 
     Koine.Decorators.Dom.InputTextDecorator = Decorator;
 })(typeof(exports) === "undefined" ? (this.Koine || (this.Koine = {})) : exports);

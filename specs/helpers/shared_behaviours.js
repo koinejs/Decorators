@@ -108,7 +108,7 @@ function behavesLikeAnInputDecorator(describedClassName) {
             expect(value).toBe('foo');
         });
 
-        it("triggers 'changed' when value changes", function (e) {
+        xit("triggers 'changed' when value changes", function (e) {
             subject.on('changed', function () {
                 output += [e.type, ":", this.getValue()].join('');
             });
@@ -117,7 +117,7 @@ function behavesLikeAnInputDecorator(describedClassName) {
             expect(output).toBe('chaged : foo');
         });
 
-        it("triggers 'changed:value' when value changes", function (e) {
+        xit("triggers 'changed:value' when value changes", function (e) {
             subject.on('changed', function () {
                 output += [e.type, ":", this.getValue()].join('');
             });
