@@ -95,10 +95,42 @@ function behavesLikeADomElementDecorator(describedClassName) {
 
 function behavesLikeAnInputDecorator(describedClassName) {
     eval('var describedClass = ' + describedClassName);
-    var subject, element;
+    var subject, element, output = '';
 
     beforeEach(function () {
-        element = document.createElement('div');
+        element = document.createElement('input');
         subject = new describedClass(element);
+    });
+
+    describe("#setValue()", function () {
+        it("sets the value", function () {
+            var value = subject.setValue('foo').getElement().value;
+            expect(value).toBe('foo');
+        });
+
+        it("triggers 'changed' when value changes", function (e) {
+            subject.on('changed', function () {
+                output += [e.type, ":", this.getValue()].join('');
+            });
+
+            subject.setValue('foo').setValue('foo');
+            expect(output).toBe('chaged : foo');
+        });
+
+        it("triggers 'changed:value' when value changes", function (e) {
+            subject.on('changed', function () {
+                output += [e.type, ":", this.getValue()].join('');
+            });
+
+            subject.setValue('foo').setValue('foo');
+            expect(output).toBe('chaged:value : foo');
+        });
+    });
+
+    describe("#getValue()", function () {
+        it("gets the value", function () {
+            var value = subject.setValue('foo').getValue();
+            expect(value).toBe('foo');
+        });
     });
 }

@@ -11,7 +11,8 @@ module.exports = function (grunt) {
         jasmine: {
             components: {
               src: [
-              'src/*js'
+                'node_modules/koine-publisher/src/*js',
+                'src/*js'
               ],
               options: {
                 specs: 'specs/*_spec.js',
