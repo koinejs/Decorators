@@ -1,5 +1,5 @@
-describe("Koine.Decorators.Dom.InputTextDecorator", function () {
-    var DescribedClass = Koine.Decorators.Dom.InputTextDecorator;
+describe("Koine.Decorators.Dom.ElementDecorator", function () {
+    var DescribedClass = Koine.Decorators.Dom.ElementDecorator;
 
     beforeEach(function () {
         element = new DescribedClass();
@@ -10,4 +10,3 @@ describe("Koine.Decorators.Dom.InputTextDecorator", function () {
         expect(instance).toBeTruthy();
     });
 });
-
