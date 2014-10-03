@@ -1,3 +1,5 @@
+var exports = exports || undefined;
+
 (function (Koine) {
   "use strinct";
   var BaseDecorator = Koine.Decorators.Dom.ElementDecorator;
