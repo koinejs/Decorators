@@ -102,42 +102,45 @@ function behavesLikeAnInputDecorator(describedClassName) {
         subject = new describedClass(element);
     });
 
-    describe("#setValue()", function () {
-        it("sets the value", function () {
-            var value = subject.setValue('foo').getElement().value;
-            expect(value).toBe('foo');
-        });
-
-        it("triggers 'changed' when value changes", function () {
-            subject.setValue('abc');
-
-            subject.on('changed', function (e) {
-                output.push(e.type);
-                output.push(this.getValue());
-                output.push(e.oldValue);
+    describe(describedClassName, function () {
+        describe("#setValue()", function () {
+            describe("#getValue()", function () {
+                it("gets the value", function () {
+                    var value = subject.setValue('foo').getValue();
+                    expect(value).toBe('foo');
+                });
             });
 
-            subject.setValue('foo').setValue('foo');
-            expect(output).toEqual(['changed', 'foo', 'abc']);
-        });
-
-        it("triggers 'changed:value' when value changes", function () {
-            subject.setValue('abc');
-            subject.on('changed:value', function (e) {
-                output.push(e.type);
-                output.push(this.getValue());
-                output.push(e.oldValue);
+            it("sets the value", function () {
+                var value = subject.setValue('foo').getElement().value;
+                expect(value).toBe('foo');
             });
 
-            subject.setValue('foo').setValue('foo');
-            expect(output).toEqual(['changed:value', 'foo', 'abc']);
-        });
-    });
+            it("triggers 'changed' when value changes", function () {
+                subject.setValue('abc');
 
-    describe("#getValue()", function () {
-        it("gets the value", function () {
-            var value = subject.setValue('foo').getValue();
-            expect(value).toBe('foo');
+                subject.on('changed', function (e) {
+                    output.push(e.type);
+                    output.push(this.getValue());
+                    output.push(e.oldValue);
+                });
+
+                subject.setValue('foo').setValue('foo');
+                expect(output).toEqual(['changed', 'foo', 'abc']);
+            });
+
+            it("triggers 'changed:value' when value changes", function () {
+                subject.setValue('abc');
+
+                subject.on('changed:value', function (e) {
+                    output.push(e.type);
+                    output.push(this.getValue());
+                    output.push(e.oldValue);
+                });
+
+                subject.setValue('foo').setValue('foo');
+                expect(output).toEqual(['changed:value', 'foo', 'abc']);
+            });
         });
     });
 }
