@@ -15,10 +15,18 @@
      * @return self
      */
     prop.setValue = function (value) {
-        if (value !== this.getValue()) {
+        var oldValue = this.getValue(), e;
+
+        if (value !== oldValue) {
             this.getElement().setAttribute('value', value);
-            // this.trigger(new Koine.Publisher.EventType('changed'));
-            // this.trigger(new Koine.Publisher.EventType('changed:value'));
+
+            e = new Koine.Publisher.EventType('changed');
+            e.oldValue = oldValue;
+            this.trigger(e);
+
+            e = new Koine.Publisher.EventType('changed:value');
+            e.oldValue = oldValue;
+            this.trigger(e);
         }
 
         return this;
@@ -32,7 +40,7 @@
         return this.getAttribute('value');
     };
 
-    // Koine.Publisher.wrap(Decorator);
+    Koine.Publisher.wrap(Decorator);
 
     Koine.Decorators.Dom.InputTextDecorator = Decorator;
 })(typeof(exports) === "undefined" ? (this.Koine || (this.Koine = {})) : exports);

@@ -95,7 +95,7 @@ function behavesLikeADomElementDecorator(describedClassName) {
 
 function behavesLikeAnInputDecorator(describedClassName) {
     eval('var describedClass = ' + describedClassName);
-    var subject, element, output = '';
+    var subject, element, output = [];
 
     beforeEach(function () {
         element = document.createElement('input');
@@ -108,22 +108,29 @@ function behavesLikeAnInputDecorator(describedClassName) {
             expect(value).toBe('foo');
         });
 
-        xit("triggers 'changed' when value changes", function (e) {
-            subject.on('changed', function () {
-                output += [e.type, ":", this.getValue()].join('');
+        it("triggers 'changed' when value changes", function () {
+            subject.setValue('abc');
+
+            subject.on('changed', function (e) {
+                output.push(e.type);
+                output.push(this.getValue());
+                output.push(e.oldValue);
             });
 
             subject.setValue('foo').setValue('foo');
-            expect(output).toBe('chaged : foo');
+            expect(output).toEqual(['changed', 'foo', 'abc']);
         });
 
-        xit("triggers 'changed:value' when value changes", function (e) {
-            subject.on('changed', function () {
-                output += [e.type, ":", this.getValue()].join('');
+        it("triggers 'changed:value' when value changes", function () {
+            subject.setValue('abc');
+            subject.on('changed:value', function (e) {
+                output.push(e.type);
+                output.push(this.getValue());
+                output.push(e.oldValue);
             });
 
             subject.setValue('foo').setValue('foo');
-            expect(output).toBe('chaged:value : foo');
+            expect(output).toEqual(['changed:value', 'foo', 'abc']);
         });
     });
 
