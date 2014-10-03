@@ -44,5 +44,5 @@ var exports = exports || undefined;
 
   Koine.Publisher.wrap(Decorator);
 
-  Koine.Decorators.Dom.InputTextDecorator = Decorator;
+  Koine.Decorators.Dom.InputDecorator = Decorator;
 })(typeof(exports) === "undefined" ? (this.Koine || (this.Koine = {})) : exports);
