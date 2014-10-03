@@ -1,8 +1,7 @@
-var describedClass = 'Koine.Decorators.Dom.SelectDecorator';
+describe("Koine.Decorators.Dom.SelectDecorator", function () {
 
-behavesLikeADomElementDecorator(describedClass);
+  behavesLikeADomElementDecorator("Koine.Decorators.Dom.SelectDecorator");
 
-describe(describedClass, function () {
   describe("#addOption()", function () {
     xit("adds a option", function () {
 
@@ -42,6 +41,5 @@ describe(describedClass, function () {
 
     });
   });
-
 });
 

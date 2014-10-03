@@ -1,11 +1,12 @@
-behavesLikeADomElementDecorator("Koine.Decorators.Dom.SelectOption");
 
 describe("Koine.Decorators.Dom.SelectOption", function () {
+  behavesLikeADomElementDecorator("Koine.Decorators.Dom.SelectOption");
+
   var element, subject;
 
   beforeEach(function () {
     element = document.createElement('options');
-    subject = new Koine.Decorators.Dom.ElementDecorator;
+    subject = new Koine.Decorators.Dom.ElementDecorator(element);
   });
 
   describe("#setValue()", function () {
