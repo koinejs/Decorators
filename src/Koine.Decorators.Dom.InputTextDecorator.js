@@ -22,11 +22,11 @@ var exports = exports || undefined;
     if (value !== oldValue) {
       this.getElement().setAttribute('value', value);
 
-      e = new Koine.Publisher.EventType('changed');
+      e = new Koine.Publisher.EventType('change');
       e.oldValue = oldValue;
       this.trigger(e);
 
-      e = new Koine.Publisher.EventType('changed:value');
+      e = new Koine.Publisher.EventType('change:value');
       e.oldValue = oldValue;
       this.trigger(e);
     }
