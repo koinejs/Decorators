@@ -17,6 +17,8 @@ module.exports = function (grunt) {
         options: {
           specs: 'specs/*_spec.js',
           keepRunner : true,
+          display : 'short',
+          summary : true,
           helpers: 'specs/helpers/*.js'
         }
       }

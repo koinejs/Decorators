@@ -7,9 +7,10 @@ var exports = exports || undefined;
 
   var Decorator = function (element) {
     BaseDecorator.call(this, element);
+    this._options = [];
   };
 
-  Decorator.prototype = BaseDecorator.prototype;
+  Decorator.prototype = new BaseDecorator(1);
   var prop = Decorator.prototype;
 
   /**
@@ -21,23 +22,104 @@ var exports = exports || undefined;
     return option;
   };
 
-  prop.addOptions = function (options) {
-    return options;
-  };
 
-  prop.addOptions = function (options) {
-    return options;
-  };
-
-  var _setValue = prop.setValue;
+  /**
+   * Selects the value of the input
+   * @param string value
+   */
   prop.setValue = function (value) {
-    _setValue.call(this, value);
+    this.getOptions().forEach(function (option) {
+      if (option.getValue() == value.toString()) {
+        option.select();
+      } else {
+        option.unselect();
+      }
+    });
+
+    var e = new Koine.Publisher.EventType("change", this);
+    this.trigger(e);
+
     return this;
   };
 
-  prop.select = function (value) {
-    _setValue.call(this, value);
+  /**
+   * Get the value of the selected option
+   * @return string
+   */
+  // prop.getValue = function () {
+  //   var selected = this.getSelected();
+  //
+  //   if (selected) {
+  //     return selected.getValue();
+  //   }
+  //
+  //   return null;
+  // };
+
+  /**
+   * Creates an option
+   * @return Koine.Decorators.Dom.SelectOptionDecorator
+   */
+  prop.createOption = function (value, label, selected) {
+    var element = document.createElement('option'),
+        option  = new Koine.Decorators.Dom.SelectOptionDecorator(element);
+
+    option.setValue(value).setLabel(label);
+
+    if (selected) {
+      option.select();
+    }
+
+    return option;
+  };
+
+  /**
+   * Add an option
+   * @param Koine.Decorators.Dom.SelectOptionDecorator option
+   * @return self
+   */
+  prop.addOption = function (option) {
+    this._options.push(option);
+    this.getElement().appendChild(option.getElement());
+
+    var e = new Koine.Publisher.EventType("options:added", this);
+    e.option = option;
+    this.trigger(e);
+
     return this;
+  };
+
+  /**
+   * Add an optin to the select
+   * @param Array options
+   * @return this
+   */
+  prop.addOptions = function (options) {
+    var self = this;
+
+    options.forEach(function (option) {
+      self.addOption(option);
+    });
+
+    return this;
+  };
+
+  prop.getOptions = function () {
+    return this._options;
+  };
+
+  prop.getSelected = function () {
+    var selected = null;
+
+    this.getOptions().forEach(function (option) {
+      if (option.isSelected()) {
+        selected = option;
+
+        return false;
+      }
+    });
+
+    return selected;
   };
 
   Koine.Decorators.Dom.SelectDecorator = Decorator;
