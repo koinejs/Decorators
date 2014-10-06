@@ -73,5 +73,5 @@ var exports = exports || undefined;
     return this;
   };
 
-  Koine.Decorators.Dom.SelectOption = Decorator;
+  Koine.Decorators.Dom.SelectOptionDecorator = Decorator;
 })(typeof(exports) === "undefined" ? (this.Koine || (this.Koine = {})) : exports);

@@ -1,6 +1,6 @@
 describe("Koine.Decorators.Dom.SelectOption", function () {
 
-  behavesLikeADomElementDecorator("Koine.Decorators.Dom.SelectOption");
+  behavesLikeADomElementDecorator("Koine.Decorators.Dom.SelectOptionDecorator");
 
   var element, subject;
 
