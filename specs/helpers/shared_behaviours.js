@@ -62,6 +62,16 @@ function behavesLikeADomElementDecorator(describedClassName) {
     });
   });
 
+  describe("#removeAttribute()", function () {
+    it("removes attribute", function () {
+      var value = subject.setAttribute('id', 'foo')
+        .removeAttribute('id')
+        .getAttribute('id');
+
+      expect(value).toBeNull();
+    });
+  });
+
   describe("#setId()", function () {
     it("sets the id", function () {
       var value = subject.setId('foo').getAttribute('id');

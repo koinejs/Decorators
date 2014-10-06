@@ -77,6 +77,17 @@ var exports = exports || undefined;
     },
 
     /**
+     * Removes an attribute
+     * @param String name
+     * @return self
+     */
+    removeAttribute : function (name) {
+      this.getElement().removeAttribute(name);
+
+      return this;
+    },
+
+    /**
      * Set the id
      * @param object value
      * @return self
