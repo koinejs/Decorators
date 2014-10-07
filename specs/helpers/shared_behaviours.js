@@ -112,8 +112,8 @@ function behavesLikeAnInputDecorator(describedClassName) {
 
   describe("#getValue()", function () {
     it("gets the value", function () {
-      var value = subject.setValue('foo').getValue();
-      expect(value).toBe('foo');
+      element.value = 'foo';
+      expect(subject.getValue()).toBe('foo');
     });
   });
 

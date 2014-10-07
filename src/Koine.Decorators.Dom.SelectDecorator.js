@@ -22,40 +22,6 @@ var exports = exports || undefined;
     return option;
   };
 
-
-  /**
-   * Selects the value of the input
-   * @param string value
-   */
-  prop.setValue = function (value) {
-    this.getOptions().forEach(function (option) {
-      if (option.getValue() == value.toString()) {
-        option.select();
-      } else {
-        option.unselect();
-      }
-    });
-
-    var e = new Koine.Publisher.EventType("change", this);
-    this.trigger(e);
-
-    return this;
-  };
-
-  /**
-   * Get the value of the selected option
-   * @return string
-   */
-  // prop.getValue = function () {
-  //   var selected = this.getSelected();
-  //
-  //   if (selected) {
-  //     return selected.getValue();
-  //   }
-  //
-  //   return null;
-  // };
-
   /**
    * Creates an option
    * @return Koine.Decorators.Dom.SelectOptionDecorator

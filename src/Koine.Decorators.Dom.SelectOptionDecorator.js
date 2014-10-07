@@ -2,22 +2,22 @@ var exports = exports || undefined;
 
 (function (Koine) {
   "use strinct";
-  var BaseDecorator = Koine.Decorators.Dom.ElementDecorator;
+  var BaseDecorator = Koine.Decorators.Dom.InputDecorator;
 
   var Decorator = function (element) {
     BaseDecorator.call(this, element);
   };
 
-  Decorator.prototype = BaseDecorator.prototype;
+  Decorator.prototype = new BaseDecorator(1);
 
-  var prop = Decorator.prototype;
+  var prot = Decorator.prototype;
 
   /**
    * Set the option label
    * @param string label
    * @return self
    */
-  prop.setLabel = function (label) {
+  prot.setLabel = function (label) {
     this.setHtml(label);
 
     return this;
@@ -27,7 +27,7 @@ var exports = exports || undefined;
    * Get the label
    * @return string
    */
-  prop.getLabel = function () {
+  prot.getLabel = function () {
     return this.getHtml();
   };
 
@@ -35,7 +35,7 @@ var exports = exports || undefined;
    * If the element is selected
    * @return boolean
    */
-  prop.isSelected = function () {
+  prot.isSelected = function () {
     return [false, undefined, null].indexOf(this.getAttribute("selected")) === -1;
   };
 
@@ -43,7 +43,7 @@ var exports = exports || undefined;
    * Mark the option as selected
    * @return self
    */
-  prop.select = function () {
+  prot.select = function () {
     this.setAttribute("selected", "selected");
 
     return this;
@@ -53,7 +53,7 @@ var exports = exports || undefined;
    * Mark the option as unselected
    * @return self
    */
-  prop.unselect = function () {
+  prot.unselect = function () {
     this.removeAttribute("selected");
 
     return this;
@@ -63,7 +63,7 @@ var exports = exports || undefined;
    * Toggle select option
    * @return self
    */
-  prop.toggle = function () {
+  prot.toggle = function () {
     if (this.isSelected()) {
       this.unselect();
     } else {

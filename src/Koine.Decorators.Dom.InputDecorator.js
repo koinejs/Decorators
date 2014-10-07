@@ -8,7 +8,7 @@ var exports = exports || undefined;
     BaseDecorator.call(this, element);
   };
 
-  Decorator.prototype = BaseDecorator.prototype;
+  Decorator.prototype = new BaseDecorator(1);
   var prop = Decorator.prototype;
 
   /**
@@ -17,10 +17,11 @@ var exports = exports || undefined;
    * @return self
    */
   prop.setValue = function (value) {
-    var oldValue = this.getValue(), e;
+    var oldValue = this.getValue();
+    var e;
 
     if (value !== oldValue) {
-      this.getElement().setAttribute('value', value);
+      this.getElement().value = value;
 
       e = new Koine.Publisher.EventType('change');
       e.oldValue = oldValue;
@@ -39,7 +40,7 @@ var exports = exports || undefined;
    * @return self
    */
   prop.getValue = function () {
-    return this.getAttribute('value');
+    return this.getElement().value;
   };
 
   Koine.Publisher.wrap(Decorator);

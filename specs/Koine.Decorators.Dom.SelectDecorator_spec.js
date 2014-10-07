@@ -1,6 +1,7 @@
 describe("Koine.Decorators.Dom.SelectDecorator", function () {
 
   behavesLikeADomElementDecorator("Koine.Decorators.Dom.SelectDecorator");
+  behavesLikeAnInputDecorator("Koine.Decorators.Dom.SelectDecorator");
 
   var element, subject, a, b, c;
 
@@ -57,53 +58,6 @@ describe("Koine.Decorators.Dom.SelectDecorator", function () {
     it("adds options", function () {
       subject.addOptions([a, b, c]);
       expect(subject.getOptions()).toEqual([a, b, c]);
-    });
-  });
-
-  describe("#setValue()", function () {
-    it("selects an option", function () {
-      subject.addOptions([a, b, c]);
-
-      subject.setValue(1);
-
-      expect(a.isSelected()).toBeTruthy();
-      expect(b.isSelected()).toBeFalsy();
-      expect(c.isSelected()).toBeFalsy();
-
-      subject.setValue(2);
-
-      expect(a.isSelected()).toBeFalsy();
-      expect(b.isSelected()).toBeTruthy();
-      expect(c.isSelected()).toBeFalsy();
-    });
-
-    it("triggers changed", function () {
-      var o = [];
-
-      subject.addOptions([a, b, c]);
-      subject.on('change', function (e) {
-        o.push(e.target);
-      });
-
-      subject.setValue(1);
-
-      expect(o).toEqual([subject]);
-    });
-  });
-
-  describe("#getValue()", function () {
-    it("gets the value of the selected element", function () {
-      element.setAttribute("value", "1");
-      value = subject.getValue();
-      expect(value).toBe('1');
-
-      element.setAttribute("value", "2");
-      value = subject.getValue();
-      expect(value).toBe('2');
-    });
-
-    it("returns null when nothing is selected", function () {
-      expect(subject.getValue()).toBeNull();
     });
   });
 
