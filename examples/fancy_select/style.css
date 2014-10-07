@@ -1,0 +1,33 @@
+#container {
+
+}
+
+#form, #log-container, #fancy-ui {
+  float: left;
+  width: 33%;
+}
+
+#fancy-ui .option {
+  width: 40px;
+  height: 40px;
+  background: #ccc;
+  line-height: 40px;
+  vertical-align: middle;
+  text-align: center;
+  margin: 5px;
+  float: left;
+}
+
+#fancy-ui .option.active {
+  background: green;
+  margin-top: 0;
+  color: white;
+}
+
+#log-container ul {
+  border: 1px solid gray;
+  height: 200px;
+  overflow: hidden;
+  overflow-y: scroll;
+  font-size: 12px;
+}
