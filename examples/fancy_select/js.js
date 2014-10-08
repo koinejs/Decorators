@@ -4,11 +4,7 @@ var input, select, $input, $select, $list, fancySelect, log;
 var FancySelect = function (select, container) {
   var that = this;
 
-  select.on('options:added', function () {
-    this.trigger('change');
-  });
-
-  select.on('change', function () {
+  select.on('options:added, change', function () {
     that.render();
   });
 
