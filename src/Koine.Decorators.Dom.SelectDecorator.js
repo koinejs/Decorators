@@ -70,6 +70,34 @@ var exports = exports || undefined;
     return this;
   };
 
+  /**
+   * Remove an option
+   * @param Koine.Decorator.Dom.SelectOptionDecorator option
+   * @return self
+   */
+  prop.removeOption = function (option) {
+    var index = this.getOptions().indexOf(option);
+
+    if (index >= 0) {
+      var e = new Koine.Publisher.EventType("options:removed", this);
+      e.option = option;
+      this.trigger(e);
+      this.getOptions().splice(index, 1);
+    }
+
+    return this;
+  };
+
+  prop.removeOptions = function (options) {
+    var that = this;
+
+    options.forEach(function (option) {
+      that.removeOption(option);
+    });
+
+    return this;
+  };
+
   prop.getOptions = function () {
     return this._options;
   };

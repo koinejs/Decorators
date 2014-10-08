@@ -61,6 +61,29 @@ describe("Koine.Decorators.Dom.SelectDecorator", function () {
     });
   });
 
+  describe("#removeOption()", function () {
+    it("removes an option", function () {
+      subject.addOptions([a, b, c]).removeOption(b);
+      expect(subject.getOptions()).toEqual([a, c]);
+    });
+
+    it("fires options:removed", function () {
+      var output = '';
+      subject.on('options:removed', function (e) {
+        output = e.option;
+      });
+      subject.addOptions([a, b, c]).removeOption(b);
+      expect(output).toBe(b);
+    });
+  });
+
+  describe("#removeOptions()", function () {
+    it("removes options", function () {
+      subject.addOptions([a, b, c]).removeOptions([a, c]);
+      expect(subject.getOptions()).toEqual([b]);
+    });
+  });
+
   describe("#getSelected()", function () {
     it("returns the selected option", function () {
       subject.addOptions([a, b, c]);
