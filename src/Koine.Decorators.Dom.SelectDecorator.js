@@ -11,14 +11,14 @@ var exports = exports || undefined;
   };
 
   Decorator.prototype = new BaseDecorator(1);
-  var prop = Decorator.prototype;
+  var prot = Decorator.prototype;
 
   /**
    * Add an option
    * @param object obj
    * @return self
    */
-  prop.addOption = function (option) {
+  prot.addOption = function (option) {
     return option;
   };
 
@@ -26,7 +26,7 @@ var exports = exports || undefined;
    * Creates an option
    * @return Koine.Decorators.Dom.SelectOptionDecorator
    */
-  prop.createOption = function (value, label, selected) {
+  prot.createOption = function (value, label, selected) {
     var element = document.createElement('option'),
         option  = new Koine.Decorators.Dom.SelectOptionDecorator(element);
 
@@ -44,7 +44,7 @@ var exports = exports || undefined;
    * @param Koine.Decorators.Dom.SelectOptionDecorator option
    * @return self
    */
-  prop.addOption = function (option) {
+  prot.addOption = function (option) {
     this._options.push(option);
     this.getElement().appendChild(option.getElement());
 
@@ -60,7 +60,7 @@ var exports = exports || undefined;
    * @param Array options
    * @return this
    */
-  prop.addOptions = function (options) {
+  prot.addOptions = function (options) {
     var self = this;
 
     options.forEach(function (option) {
@@ -75,7 +75,7 @@ var exports = exports || undefined;
    * @param Koine.Decorator.Dom.SelectOptionDecorator option
    * @return self
    */
-  prop.removeOption = function (option) {
+  prot.removeOption = function (option) {
     var index = this.getOptions().indexOf(option);
 
     if (index >= 0) {
@@ -88,7 +88,12 @@ var exports = exports || undefined;
     return this;
   };
 
-  prop.removeOptions = function (options) {
+  /**
+   * Remove options
+   * @param Array[Koine.Decorator.Dom.SelectOptionDecorator] option
+   * @return self
+   */
+  prot.removeOptions = function (options) {
     var that = this;
 
     options.forEach(function (option) {
@@ -98,11 +103,19 @@ var exports = exports || undefined;
     return this;
   };
 
-  prop.getOptions = function () {
+  /**
+   * Get the options
+   * @return Array[Koine.Decorator.Dom.SelectOptionDecorator] option
+   */
+  prot.getOptions = function () {
     return this._options;
   };
 
-  prop.getSelected = function () {
+  /**
+   * Get the selected elements
+   * @return Koine.Decorator.Dom.SelectOptionDecorator
+   */
+  prot.getSelected = function () {
     var selected = null;
 
     this.getOptions().forEach(function (option) {
