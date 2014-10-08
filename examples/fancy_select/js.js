@@ -1,3 +1,4 @@
+var Koine = Koine || {};
 var input, select, $input, $select, $list, fancySelect, log;
 
 var FancySelect = function (select, container) {
@@ -29,7 +30,7 @@ FancySelect.prototype.render = function () {
     var active = (option.getValue() == select.getValue()) ? 'active' : '';
     var a = [
       '<div data-value="', option.getValue() ,'" class="option ', active , '">',
-        option.getValue(),
+      option.getValue(),
       '</div>'
     ];
     o.push(a.join(""));
@@ -38,7 +39,8 @@ FancySelect.prototype.render = function () {
   this.container.html(o.join(""));
 };
 
-$(document).ready(function () {
+(function(jQuery, Koine) {
+  $(document).ready(function () {
     $input  = $('#name');
     $select = $('#role');
     $list   = $('#log');
@@ -69,4 +71,6 @@ $(document).ready(function () {
       select.addOption(option);
       log('input changed to ' + value);
     });
-});
+  });
+
+})(jQuery, Koine);
