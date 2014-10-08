@@ -116,17 +116,25 @@ var exports = exports || undefined;
    * @return Koine.Decorator.Dom.SelectOptionDecorator
    */
   prot.getSelected = function () {
-    var selected = null;
+    var selected = [];
 
     this.getOptions().forEach(function (option) {
       if (option.isSelected()) {
-        selected = option;
-
-        return false;
+        selected.push(option);
       }
     });
 
-    return selected;
+    if (this.isMultiple()) {
+      return selected;
+    } else if (selected.length > 0) {
+      return selected[0];
+    }
+
+    return null;
+  };
+
+  prot.isMultiple = function () {
+    return this.getAttribute("multiple") !== null;
   };
 
   Koine.Decorators.Dom.SelectDecorator = Decorator;

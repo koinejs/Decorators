@@ -85,20 +85,36 @@ describe("Koine.Decorators.Dom.SelectDecorator", function () {
   });
 
   describe("#getSelected()", function () {
-    it("returns the selected option", function () {
-      subject.addOptions([a, b, c]);
+    describe("when select is not multiple", function () {
+      it("returns the selected option", function () {
+        subject.addOptions([a, b, c]);
 
-      b.select();
-      expect(subject.getSelected()).toBe(b);
+        b.select();
+        expect(subject.getSelected()).toBe(b);
 
-      b.unselect();
-      c.select();
-      expect(subject.getSelected()).toBe(c);
+        b.unselect();
+        c.select();
+        expect(subject.getSelected()).toBe(c);
+      });
+
+      it("returns null when no option is selected", function () {
+        expect(subject.getSelected()).toBeNull();
+      });
     });
 
-    it("returns null when no option is selected", function () {
-      expect(subject.getSelected()).toBeNull();
+    describe("when select is multiple", function () {
+      beforeEach(function () {
+        subject.setAttribute("multiple", "multiple");
+        subject.addOptions([a, b, c]);
+        a.select();
+        c.select();
+      });
+
+      it("return an array of selected options", function () {
+        expect(subject.getSelected()).toEqual([a, c]);
+      });
     });
+
   });
 });
 
