@@ -17,7 +17,19 @@ Package information:
 ### Usage
 
 ```javascript
+var select = new Koine.Decorators.Dom.SelectDecorator(document.getElementById('some-select'));
+var option = select.createOption('value', 'label', checked);
+
+select.addOption(option);
 ```
+
+#### Events
+
+##### Koine.Decorators.Dom.SelectDecorator
+
+- ```change``` - when the value change
+- ```options:added``` - when an option was added
+- ```options:remove``` - when an option was added
 
 ### Installing
 
