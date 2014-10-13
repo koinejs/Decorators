@@ -9,8 +9,8 @@
   },
   "tags": [
     "decorators",
-  "dom"
-    ],
+    "dom"
+   ],
   "dependencies": {
     "koine-publisher":"~0.9.2"
   },
