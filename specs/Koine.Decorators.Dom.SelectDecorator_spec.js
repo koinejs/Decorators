@@ -13,6 +13,38 @@ describe("Koine.Decorators.Dom.SelectDecorator", function () {
     c = subject.createOption(3, 3);
   });
 
+  describe("constructor", function () {
+    it("reads options from the given element", function () {
+      var select = document.createElement('select');
+      var option1 = document.createElement('option');
+      var option2 = document.createElement('option');
+      select.appendChild(option1);
+      select.appendChild(option2);
+
+      option1.value = "1";
+      option1.innerHTML = 'one';
+      option2.value = "2";
+      option2.innerHTML = 'two';
+      option2.setAttribute("selected", true);
+
+      subject = new Koine.Decorators.Dom.SelectDecorator(select);
+      expect(subject.getOptions().length).toEqual(2);
+
+      // sets value
+      expect(subject.getOptions()[0].getValue()).toEqual('1');
+      expect(subject.getOptions()[1].getValue()).toEqual('2');
+
+      // sets label
+      expect(subject.getOptions()[0].getLabel()).toEqual('one');
+      expect(subject.getOptions()[1].getLabel()).toEqual('two');
+
+      // sets active
+      expect(subject.getOptions()[0].isSelected()).toBeFalsy();
+      expect(subject.getOptions()[1].isSelected()).toBeTruthy();
+    });
+  });
+
+
   describe("#createOption()", function () {
     it("creates an option", function () {
       var option1 = subject.createOption(1, "foo", false),
@@ -114,7 +146,6 @@ describe("Koine.Decorators.Dom.SelectDecorator", function () {
         expect(subject.getSelected()).toEqual([a, c]);
       });
     });
-
   });
 });
 

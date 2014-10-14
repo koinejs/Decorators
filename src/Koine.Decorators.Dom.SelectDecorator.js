@@ -8,6 +8,7 @@ var exports = exports || undefined;
   var Decorator = function (element) {
     BaseDecorator.call(this, element);
     this._options = [];
+    this.factoryFromElement(element);
   };
 
   Decorator.prototype = new BaseDecorator(1);
@@ -133,8 +134,28 @@ var exports = exports || undefined;
     return null;
   };
 
+  /**
+   * Is it a multiple select?
+   * @param object obj
+   * @return boolean
+   */
   prot.isMultiple = function () {
     return this.getAttribute("multiple") !== null;
+  };
+
+  /**
+   * Add options based on a given element
+   * @param object obj
+   * @return self
+   */
+  prot.factoryFromElement = function (element) {
+    var options = [].slice.call(element.querySelectorAll('option'));
+    var that = this;
+
+    options.forEach(function (option) {
+      option = new Koine.Decorators.Dom.SelectOptionDecorator(option);
+      that.addOption(option);
+    });
   };
 
   Koine.Decorators.Dom.SelectDecorator = Decorator;
