@@ -23,9 +23,22 @@ module.exports = function (grunt) {
           helpers: 'specs/helpers/*.js'
         }
       }
+    },
+    uglify: {
+      minify: {
+        files: {
+          'dist/Koine.Decorators.min.js': [
+            'src/Koine.Decorators.Dom.ElementDecorator.js',
+            'src/Koine.Decorators.Dom.InputDecorator.js',
+            'src/Koine.Decorators.Dom.SelectDecorator.js',
+            'src/Koine.Decorators.Dom.SelectOptionDecorator.js',
+          ]
+        }
+      }
     }
   });
 
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-usemin');
@@ -40,6 +53,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('travis', [
     'jasmine',
-    'jshint'
+    'jshint',
+    'uglify'
   ]);
 };
