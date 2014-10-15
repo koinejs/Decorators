@@ -1,7 +1,7 @@
 {
   "name": "koine-decorators-dom",
   "description": "Some decorators for the DOM elements",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "license": "MIT",
   "author": {
     "name" : "Marcelo Jacobus",
@@ -12,7 +12,7 @@
     "dom"
    ],
   "dependencies": {
-    "koine-publisher":"~0.9.2"
+    "koine-publisher":"~0.9.3"
   },
   "devDependencies": {
     "jasmine": "~2.*",

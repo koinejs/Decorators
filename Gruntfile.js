@@ -12,7 +12,7 @@ module.exports = function (grunt) {
     jasmine: {
       components: {
         src: [
-          'node_modules/koine-publisher/src/*js',
+          'node_modules/koine-publisher/dist/*js',
           'src/*js'
         ],
         options: {
@@ -28,6 +28,17 @@ module.exports = function (grunt) {
       minify: {
         files: {
           'dist/Koine.Decorators.min.js': [
+            'src/Koine.Decorators.Dom.ElementDecorator.js',
+            'src/Koine.Decorators.Dom.InputDecorator.js',
+            'src/Koine.Decorators.Dom.SelectDecorator.js',
+            'src/Koine.Decorators.Dom.SelectOptionDecorator.js',
+          ]
+        }
+      },
+      withDependencies: {
+        files: {
+          'dist/Koine.Decorators.with-dependencies.min.js': [
+            'node_modules/koine-publisher/src/*js',
             'src/Koine.Decorators.Dom.ElementDecorator.js',
             'src/Koine.Decorators.Dom.InputDecorator.js',
             'src/Koine.Decorators.Dom.SelectDecorator.js',
