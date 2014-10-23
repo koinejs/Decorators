@@ -94,7 +94,17 @@ describe("Koine.Decorators.Dom.SelectDecorator", function () {
   });
 
   describe("#removeOption()", function () {
-    it("removes an option", function () {
+    it("removes an option from the beggining of the array", function () {
+      subject.addOptions([a, b, c]).removeOption(a);
+      expect(subject.getOptions()).toEqual([b, c]);
+    });
+
+    it("removes an option from the end of the array", function () {
+      subject.addOptions([a, b, c]).removeOption(c);
+      expect(subject.getOptions()).toEqual([a, b]);
+    });
+
+    it("removes an option from the middle of the array", function () {
       subject.addOptions([a, b, c]).removeOption(b);
       expect(subject.getOptions()).toEqual([a, c]);
     });
@@ -106,6 +116,13 @@ describe("Koine.Decorators.Dom.SelectDecorator", function () {
       });
       subject.addOptions([a, b, c]).removeOption(b);
       expect(output).toBe(b);
+    });
+  });
+
+  describe("#clearOptions()", function () {
+    it("removes all options", function () {
+      subject.addOptions([a, b, c]).clearOptions();
+      expect(subject.getOptions().length).toEqual(0);
     });
   });
 

@@ -97,9 +97,19 @@ var exports = exports || undefined;
   prot.removeOptions = function (options) {
     var that = this;
 
-    options.forEach(function (option) {
+    options.slice(0).forEach(function (option) {
       that.removeOption(option);
     });
+
+    return this;
+  };
+
+  /**
+   * Remove all options
+   * @return self
+   */
+  prot.clearOptions = function () {
+    this.removeOptions(this.getOptions());
 
     return this;
   };
